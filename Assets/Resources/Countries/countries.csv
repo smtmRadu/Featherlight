@@ -40,13 +40,9 @@ Caribbean Netherlands,Kralendijk,12.1500,-68.2667,11313,Capital
 Cayman Islands,George Town,19.2866,-81.3744,34875,Capital
 Central African Republic,Bangui,4.3612,18.5550,850946,Capital
 Chad,N'Djaména,12.1067,15.0444,1322679,Capital
-Channel Islands,St. Helier,49.1880,-2.1049,34386,Capital
 Channel Islands,St. Peter Port,49.4598,-2.5353,16271,Capital
 Chile,Santiago,-33.4569,-70.6483,6680371,Capital
 China,Beijing,39.9075,116.3972,19617963,Capital
-"China, Hong Kong SAR",Hong Kong,22.2796,114.1887,7428887,Capital
-"China, Macao SAR",Macao,22.2006,113.5461,632418,Capital
-"China, Taiwan Province of China",Taibei,25.0470,121.5457,2705791,Others
 Colombia,Bogotá,4.6097,-74.0818,10574409,Capital
 Comoros,Moroni,-11.7022,43.2551,62351,Capital
 Congo,Brazzaville,-4.2658,15.2832,2229693,Capital
@@ -221,7 +217,7 @@ Ukraine,Kyiv (Kiev),50.4454,30.5186,2956706,Capital
 United Arab Emirates,Abu Zaby (Abu Dhabi),24.4648,54.3618,1419699,Capital
 United Kingdom,London,51.5085,-0.1257,9046485,Capital
 United Republic of Tanzania,Dodoma,-6.1722,35.7395,261645,Capital
-United States of America,"Washington, D.C.",38.8951,-77.0364,5206593,Capital
+United States of America,Washington D.C.,38.8951,-77.0364,5206593,Capital
 United States Virgin Islands,Charlotte Amalie,18.3419,-64.9307,52322,Capital
 Uruguay,Montevideo,-34.8335,-56.1674,1736989,Capital
 Uzbekistan,Tashkent,41.2647,69.2163,2463969,Capital

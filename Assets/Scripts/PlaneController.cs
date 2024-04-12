@@ -86,10 +86,6 @@ namespace kbradu
            // // Apply the roll rotation to the plane
            // transform.localRotation = rollRotation * transform.localRotation;
         }
-        private void OnDrawGizmos()
-        {
-           
-        }
     }
 }
 
