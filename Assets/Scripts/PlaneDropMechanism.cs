@@ -1,22 +1,36 @@
 using kbradu;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaneDropMechanism : MonoBehaviour
 {
+
+    [SerializeField] private AudioClip dropSoundEffect;
 	[SerializeField] private GameObject dropPrefab;
     [SerializeField] private TMPro.TMP_Text uiDestinations;
     [SerializeField] private Transform dropPoint;
-    [SerializeField] private int depositCapacity = 3;
+    [SerializeField] private int DEPOSIT_CAPACITY = 3;
+    [SerializeField] private List<GameObject> dropsInside;
 
     List<Country> destinationsList = new List<Country>();
     public Country currentSelectedDestination = null;
+    private AudioSource audioSource;
+    private void Awake()
+    {
+        audioSource = transform.AddComponent<AudioSource>();
+        audioSource.loop = false;
+        audioSource.volume = 1f;
+        audioSource.pitch = 0.5f;
+        audioSource.playOnAwake = false;
+        audioSource.clip = dropSoundEffect;
+    }
 
     private void Update()
     {
         SwapBetweenDrops();
-        if (Input.GetKeyDown(KeyCode.Space) && destinationsList.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Space))
             Drop();
 
         UpdateUI();
@@ -24,7 +38,7 @@ public class PlaneDropMechanism : MonoBehaviour
     }
 
 
-    public bool CanDepositNewPackage() => destinationsList.Count < depositCapacity;
+    public bool CanDepositNewPackage() => destinationsList.Count < DEPOSIT_CAPACITY;
 
     private void SwapBetweenDrops()
     {
@@ -46,24 +60,65 @@ public class PlaneDropMechanism : MonoBehaviour
             }
         }
     }
-    public void DepositDrop(Country country)
+    public void SwapToLeftDrop()
+    {
+        var index = destinationsList.IndexOf(currentSelectedDestination);
+        if (index > 0)
+        {
+            currentSelectedDestination = destinationsList[index - 1];
+        }
+    }
+
+    public void SwapToRightDrop()
+    {
+        var index = destinationsList.IndexOf(currentSelectedDestination);
+        if (index < destinationsList.Count - 1)
+        {
+            currentSelectedDestination = destinationsList[index + 1];
+        }
+    }
+    public void Deposit(Country country)
     {
         Debug.Log($"Drop deposited ({country.name})");
         if (destinationsList.Count == 0)
             currentSelectedDestination = country;
 
         destinationsList.Add(country);
+
+        foreach (var item in dropsInside)
+        {
+            if(!item.gameObject.activeSelf)
+            {
+                item.gameObject.SetActive(true);
+                break;
+            }
+        }
     }
 
-    private void Drop()
+    public void Drop()
     {
+        if (!(destinationsList.Count > 0))
+            return;
+
         var drop = Instantiate(dropPrefab, dropPoint.position, Quaternion.identity, transform.parent);
         drop.GetComponent<DropScript>().country = currentSelectedDestination;
-
         destinationsList.Remove(currentSelectedDestination);
 
         if(destinationsList.Count > 0)
             currentSelectedDestination = destinationsList[0];
+
+        audioSource.Play();
+
+        for (int i = dropsInside.Count - 1; i >= 0; i--)
+        {
+            var item = dropsInside[i];
+            if (item.gameObject.activeSelf)
+            {
+                item.gameObject.SetActive(false);
+                break;
+            }
+            
+        }
     }
 
     private void UpdateUI()

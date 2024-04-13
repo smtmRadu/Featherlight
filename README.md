@@ -1,2 +1,2 @@
 # Featherlight
-Deliver packages like the sturdiest pilot.
+A lighter version of Sebastian Lague's Grographical Adventures game.

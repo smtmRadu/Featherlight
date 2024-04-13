@@ -20,15 +20,16 @@ namespace kbradu
 
         private void Start()
         {
-            // Generate a random point on the surface of a sphere (representing Earth)
             Vector3 randomPointOnSphere = UnityEngine.Random.onUnitSphere;
-
-            // Set the position of the package to the random point scaled by the desired altitude
-            transform.localPosition = randomPointOnSphere * reachAltitude; // Adding Earth's radius to altitude
-
-            // float randomYRot = UnityEngine.Random.Range(0, 360f); // rotation is bad
-            // Align the package with the Earth's center
+            transform.localPosition = randomPointOnSphere * reachAltitude;        
             transform.rotation = Quaternion.LookRotation((transform.position - earthParent.position).normalized) * Quaternion.Euler(90f, 0f, 0);
+            float randomYRot = UnityEngine.Random.Range(0, 360f); // rotation is bad
+            transform.Rotate(0, randomYRot, 0);
+        }
+
+        private void Update()
+        {
+            transform.Rotate(0, Time.deltaTime, 0); // little self rotation
         }
 
         private void OnTriggerEnter(Collider other)
@@ -36,7 +37,7 @@ namespace kbradu
             if (other.CompareTag("Plane") && other.GetComponent<PlaneDropMechanism>().CanDepositNewPackage())
             {
                Debug.Log("Package catched");
-               other.GetComponent<PlaneDropMechanism>().DepositDrop(this.destination);
+               other.GetComponent<PlaneDropMechanism>().Deposit(this.destination);
                onCatch?.Invoke(this, EventArgs.Empty);
                Destroy(this.gameObject);
             }

@@ -6,7 +6,7 @@ namespace kbradu
     public class CountriesDatabase : MonoBehaviour
     {
         private Dictionary<string, Country> countryDict;
-        private List<Country> countryList;
+        public List<Country> countryList;
         private void Awake()
         {
             countryDict = new();

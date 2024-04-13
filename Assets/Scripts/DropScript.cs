@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 namespace kbradu
@@ -42,9 +43,11 @@ namespace kbradu
                 Vector2 lat_long = GetLatLonFromPosition(relativePositionToEarth, earthCollider, altitude);
 
                 float errorDistance = CalculateDropError(lat_long.x, lat_long.y, country.latitude, country.longitude);
+               
                 Debug.Log($"{name} - [Error: {errorDistance}km] | dropped at [Latitude: " + lat_long.x+ ", Longitude: " + lat_long.y + "]" + $" | target at [Latitude: {country.latitude}, Longitude: {country.longitude}]");
 
                 // do scoring stuff afterwards here
+                FindAnyObjectByType<PlayerScript>().AppendMission(country, errorDistance);
 
 
 
