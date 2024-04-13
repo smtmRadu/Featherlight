@@ -1,0 +1,6 @@
+Because GitHub doesn t allow me to upload files larger than 25mb, i uploaded the project with low quality assets. 
+When you build the app, those must be replaced with high quality assets.
+Basically, those .rar files are the HQ assets.
+
+1. Replace the earth textures with those in the archivies.
+2. [Optional] Add the background music .wav file to the BackgroundMusic gameobject.

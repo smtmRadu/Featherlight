@@ -7,7 +7,6 @@ namespace kbradu
     {
         [SerializeField] int cloudsNumber = 30;
         [SerializeField] List<GameObject> cloudsPrefabs;
-
         private void Start()
         {
             for (int i = 0; i < cloudsNumber; i++)
@@ -16,6 +15,8 @@ namespace kbradu
                 var randomCloud = cloudsPrefabs[randIndex];
                 Instantiate(randomCloud, transform);
             }
+
+
         }
     }
 

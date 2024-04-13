@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1568416120786467888}
   - component: {fileID: 2775115752112322572}
   - component: {fileID: -6744132465750620854}
+  - component: {fileID: -4958866304478257819}
   m_Layer: 0
   m_Name: Cloud1
   m_TagString: Untagged
@@ -98,3 +99,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reachAltitude: 0.12
   forwardSpeed: 0.75
+  dissolveSpeed: 10
+  cloudsPrefabs: []
+--- !u!65 &-4958866304478257819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659025325494057777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.7747073, y: 2.361948, z: 2.5034194}
+  m_Center: {x: 0.6676624, y: 0.30103105, z: 0.074976206}
