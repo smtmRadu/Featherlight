@@ -70,3 +70,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# HQ assets with high size are ignored but serialized in zip files
+G-earth-screensHD.fbx
+G-earth-screensHD_u1_v1.jpg
+G-earth-screensHD_u1_v2.jpg
+G-earth-screensHD_u2_v1.jpg
+G-earth-screensHD.fbx.meta
+G-earth-screensHD_u1_v1.jpg.meta
+G-earth-screensHD_u1_v2.jpg.meta
+G-earth-screensHD_u2_v1.jpg.meta

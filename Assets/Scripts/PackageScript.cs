@@ -14,6 +14,7 @@ namespace kbradu
 
         public event EventHandler onCatch;
         public Country destination;
+        public Shader fadeShader;
 
         
         private void Awake()
@@ -34,7 +35,7 @@ namespace kbradu
                     cop.SetFloat("_Mode", 2); // 2 corresponds to fade mode
                     cop.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
                     cop.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    // cop.SetInt("_ZWrite", 0); // THIS FUCKS UP THE OBJECT AND APPEARS BUGGY
+                    // // cop.SetInt("_ZWrite", 0); // THIS FUCKS UP THE OBJECT AND APPEARS BUGGY
                     cop.DisableKeyword("_ALPHATEST_ON");
                     cop.DisableKeyword("_ALPHABLEND_ON");
                     cop.EnableKeyword("_ALPHAPREMULTIPLY_ON");

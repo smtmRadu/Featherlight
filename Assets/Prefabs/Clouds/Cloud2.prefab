@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reachAltitude: 0.12
   forwardSpeed: 0.75
+  fadeShader: {fileID: 4800000, guid: e22eadaa35f6f3346ad53a11040282a0, type: 3}
   dissolveSpeed: 0.7
   cloudsPrefabs: []
 --- !u!65 &-9036586086049384712

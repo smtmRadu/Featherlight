@@ -8,7 +8,7 @@ namespace kbradu
     {
         public float reachAltitude = 0.12f;
         public float forwardSpeed = 0.75f;
-
+        public Shader fadeShader;
 
         [SerializeField] float dissolveSpeed = 0.7f;
         [SerializeField] List<GameObject> cloudsPrefabs;
@@ -56,7 +56,6 @@ namespace kbradu
 
         private void OnTriggerStay(Collider other)
         {
-            Debug.Log("here");
             if(other.CompareTag("Plane"))
             {
                 float newAlpha = selfMaterial.color.a - dissolveSpeed * Time.deltaTime;

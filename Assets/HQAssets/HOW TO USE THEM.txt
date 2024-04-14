@@ -1,0 +1,5 @@
+Because github doesn t let me push high size pngs, i serialized everything in this folder as zip files.
+After unzip, you, get 1 earth fbx and 3 textures. Do not change any names. Replace old earth assets with the new ones. Set fbx scale factor to 0.01. 
+Earth gameobject must have rotation 0,0,0 and scale 100.
+
+GL to not fuck everything up again.

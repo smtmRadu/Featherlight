@@ -390,6 +390,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachAltitude: 0.12
+  fadeDuration: 0
+  fadeShader: {fileID: 0}
 --- !u!114 &-1006311657662650704
 MonoBehaviour:
   m_ObjectHideFlags: 0

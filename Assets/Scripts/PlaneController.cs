@@ -24,6 +24,8 @@ namespace kbradu
         [Header("Mobile controls")]
         [SerializeField] private ButtonState acceleartion1;
         [SerializeField] private ButtonState acceleartion2;
+        [SerializeField] private ButtonState rotateLeft;
+        [SerializeField] private ButtonState rotateRight;
 
         private void Start()
         {
@@ -105,29 +107,13 @@ namespace kbradu
                 forwardSpeed = Mathf.Clamp(forwardSpeed * forwardDeceleration, baseForwardSpeed, maxForwardSpeed);
 
 
-
-            var attitude = Input.gyro.attitude;
-            attitude = new Quaternion(attitude.x, attitude.y, attitude.z, attitude.w);
-
-            // Get the vector representing global up (away from gravity)
-            // within the device's coordinate system.
-            Vector3 localDown = Quaternion.Inverse(Input.gyro.attitude) * Vector3.down;
-
-            // Extract our roll rotation - how much gravity points to our left or right.
-            float rollDegrees = Mathf.Asin(localDown.x) * Mathf.Rad2Deg;
-
-            // Extract our pitch rotation - how much gravity points forward or back.
-            float pitchDegrees = Mathf.Atan2(localDown.y, localDown.z) * Mathf.Rad2Deg;
-
-            print(pitchDegrees);
-
-            // Now, you can use the attitude quaternion to control your object. For example:
-            if (attitude.eulerAngles.z > 180 && attitude.eulerAngles.z < 360)
+            // handle sideways
+            if (rotateLeft.IsPressed)
             {
                 // Increase rotation speed to the left
                 sidewaysRotationSpeed -= sidewaysAcceleration * Time.fixedDeltaTime;
             }
-            else if (attitude.eulerAngles.z >= 0 && attitude.eulerAngles.z < 180)
+            else if (rotateRight.IsPressed)
             {
                 // Increase rotation speed to the right
                 sidewaysRotationSpeed += sidewaysAcceleration * Time.fixedDeltaTime;
@@ -137,7 +123,42 @@ namespace kbradu
                 // Gradually slow down rotation when no keys are pressed
                 sidewaysRotationSpeed *= sidewaysDeceleration;
             }
+
+            // Clamp the rotation speed to within the maximum limits
             sidewaysRotationSpeed = Mathf.Clamp(sidewaysRotationSpeed, -maxRotationSpeed, maxRotationSpeed);
+
+            // var attitude = Input.gyro.attitude;
+            // attitude = new Quaternion(attitude.x, attitude.y, attitude.z, attitude.w);
+            // 
+            // // Get the vector representing global up (away from gravity)
+            // // within the device's coordinate system.
+            // Vector3 localDown = Quaternion.Inverse(Input.gyro.attitude) * Vector3.down;
+            // 
+            // // Extract our roll rotation - how much gravity points to our left or right.
+            // float rollDegrees = Mathf.Asin(localDown.x) * Mathf.Rad2Deg;
+            // 
+            // // Extract our pitch rotation - how much gravity points forward or back.
+            // float pitchDegrees = Mathf.Atan2(localDown.y, localDown.z) * Mathf.Rad2Deg;
+            // 
+            // print(pitchDegrees);
+            // 
+            // // Now, you can use the attitude quaternion to control your object. For example:
+            // if (attitude.eulerAngles.z > 180 && attitude.eulerAngles.z < 360)
+            // {
+            //     // Increase rotation speed to the left
+            //     sidewaysRotationSpeed -= sidewaysAcceleration * Time.fixedDeltaTime;
+            // }
+            // else if (attitude.eulerAngles.z >= 0 && attitude.eulerAngles.z < 180)
+            // {
+            //     // Increase rotation speed to the right
+            //     sidewaysRotationSpeed += sidewaysAcceleration * Time.fixedDeltaTime;
+            // }
+            // else
+            // {
+            //     // Gradually slow down rotation when no keys are pressed
+            //     sidewaysRotationSpeed *= sidewaysDeceleration;
+            // }
+            // sidewaysRotationSpeed = Mathf.Clamp(sidewaysRotationSpeed, -maxRotationSpeed, maxRotationSpeed);
         }
 
         private void ConstantForwardMove()

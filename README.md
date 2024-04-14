@@ -7,3 +7,5 @@ A - Left
 D - Right
 Space - Drop package
 LeftArrow/RightArrow - Swap between packages
+
+![img](https://github.com/smtmRadu/Featherlight/blob/main/Assets/Icon/img.png?raw=true)

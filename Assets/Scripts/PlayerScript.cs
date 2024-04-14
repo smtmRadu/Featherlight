@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace kbradu
@@ -14,6 +14,7 @@ namespace kbradu
         private void Start()
         {
             deliveredDrops = new();
+            statistics.text = "";
         }
         public void AppendMission(Country country, float error)
         {
@@ -21,15 +22,29 @@ namespace kbradu
             deliveredDrops.AddLast((country, acc, error));
             score += Scoring.Score(acc);
 
-            statistics.text = $"Packages Delivered: {deliveredDrops.Count} \nScore: {score}";
-
+            switch(acc)
+            {
+                case DropAccuracyType.Perfect:
+                    statistics.text += "<color=green>•</color>";
+                        break;
+                case DropAccuracyType.Good:
+                    statistics.text += "<color=yellow>•</color>";
+                    break;
+                case DropAccuracyType.Moderate:
+                    statistics.text += "<color=orange>•</color>";
+                    break;
+                case DropAccuracyType.Bad:
+                    statistics.text += "<color=red>•</color>";
+                    break;
+            }
+           
 
             string text = "";
 
             switch(acc)
             {
                 case DropAccuracyType.Perfect:
-                    text = $"<color=green>Perfect deliver! You dropped the package right in <b>{country.name}</b>, <b>{country.capitalCity}</b>.</color>";
+                    text = $"<color=green>Perfect deliver! You dropped the package right in <b>{country.name}</b>, <b>{country.capitalCity}</b>, no more than <b>{(int)error}</b>km away.</color>";
                     break;
                 case DropAccuracyType.Good:
                     text = $"<color=yellow>Good deliver! You dropped the package <b>{(int)error}</b>km away from <b>{country.name}</b>, <b>{country.capitalCity}</b>.</color>";
@@ -38,7 +53,7 @@ namespace kbradu
                     text = $"<color=orange>Quite far from <b>{country.name}</b>, <b>{country.capitalCity}</b>! You dropped the package <b>{(int)error}</b>km away.</color>";
                     break;
                 case DropAccuracyType.Bad:
-                    text = $"<color=red>Oh no! You dropped the package so far from <b>{country.name}</b>, <b>{country.capitalCity}</b>.</color>";
+                    text = $"<color=red>Oh no! You dropped the package too far from <b>{country.name}</b>, <b>{country.capitalCity}</b>, more than <b>{(int)error}</b>km away.</color>";
                     break;
             }
 
