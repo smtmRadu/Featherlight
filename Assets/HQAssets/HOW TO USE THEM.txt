@@ -3,3 +3,14 @@ After unzip, you, get 1 earth fbx and 3 textures. Do not change any names. Repla
 Earth gameobject must have rotation 0,0,0 and scale 100.
 
 GL to not fuck everything up again.
+
+
+EarthMesh (fbx scale factor = 0.01)
+Pos = 0, 0, 2500
+Rot = 0, 0, 0
+Scale = 100, 100, 100
+
+EarthCollider
+Pos = 0, 0, 0
+Rot = -17.4, 109.4, -18.8
+Scale = 1, 1, 1

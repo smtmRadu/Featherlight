@@ -13,8 +13,9 @@ namespace kbradu
         [SerializeField] float dissolveSpeed = 0.7f;
         [SerializeField] List<GameObject> cloudsPrefabs;
 
+        private Shader transparentShader;
         private Material selfMaterial;
-        private Renderer renderer;
+        private MeshRenderer r;
 
         private void Start()
         {
@@ -25,8 +26,8 @@ namespace kbradu
             float randomRot = Random.Range(0, 360f);
             transform.Rotate(0, randomRot, 0);
 
-            renderer = GetComponent<Renderer>();
-            selfMaterial = new Material(renderer.material);
+            r = GetComponent<MeshRenderer>();
+            selfMaterial = new Material(r.material);
             selfMaterial.name = "Some copied material here";
             selfMaterial.SetFloat("_Mode", 2); // 2 corresponds to fade mode
             selfMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
@@ -35,7 +36,8 @@ namespace kbradu
             selfMaterial.DisableKeyword("_ALPHABLEND_ON");
             selfMaterial.EnableKeyword("_ALPHAPREMULTIPLY_ON");
             selfMaterial.renderQueue = 3000;
-
+            // selfMaterial.shader = transparentShader;
+            r.material = selfMaterial;
         }
 
         private void Update()
@@ -45,12 +47,12 @@ namespace kbradu
             transform.RotateAround(transform.parent.position, planeRotationAxisAroundEarth, -forwardSpeed * Time.deltaTime);
 
             // Regain color back
-            if(renderer.material.color.a < 1f)
+            if(r.material.color.a < 1f)
             {
                 float newAlpha = selfMaterial.color.a + dissolveSpeed * Time.deltaTime / 10f;
                 newAlpha = Mathf.Clamp01(newAlpha);
                 selfMaterial.color = new Color(selfMaterial.color.r, selfMaterial.color.g, selfMaterial.color.b, newAlpha);
-                renderer.material = selfMaterial;
+                r.material = selfMaterial;
             }
         }
 
@@ -61,7 +63,7 @@ namespace kbradu
                 float newAlpha = selfMaterial.color.a - dissolveSpeed * Time.deltaTime;
                 newAlpha = Mathf.Clamp01(newAlpha);
                 selfMaterial.color = new Color(selfMaterial.color.r, selfMaterial.color.g, selfMaterial.color.b, newAlpha);
-                renderer.material = selfMaterial;
+                r.material = selfMaterial;
             }
         }
     }
