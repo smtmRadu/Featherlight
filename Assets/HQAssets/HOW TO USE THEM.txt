@@ -14,3 +14,12 @@ EarthCollider
 Pos = 0, 0, 0
 Rot = -17.4, 109.4, -18.8
 Scale = 1, 1, 1
+
+
+
+From pc to mobile changes (needs improvements):
+- clouds have disabled box colliders
+- reduced stars num 1000 -> 500
+- reduced clouds num 60 -> 40
+- reduced birds num 100 -> 50
+- quality remains the same 16384

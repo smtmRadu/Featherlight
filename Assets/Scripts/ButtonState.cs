@@ -5,7 +5,7 @@ namespace kbradu
 {
     public class ButtonState : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        private bool isPressed = false;
+        [SerializeField, ViewOnly] private bool isPressed = false;
 
         public bool IsPressed => isPressed;
         public void OnPointerDown(PointerEventData eventData)
@@ -16,15 +16,6 @@ namespace kbradu
         public void OnPointerUp(PointerEventData eventData)
         {
             isPressed = false;
-        }
-
-        void Update()
-        {
-            if (isPressed)
-            {
-                // The button is being pressed
-                Debug.Log("Button is being pressed");
-            }
         }
     }
 }

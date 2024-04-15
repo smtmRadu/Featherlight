@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 namespace kbradu
 {
     public class PlaneController : MonoBehaviour
@@ -18,7 +16,6 @@ namespace kbradu
         [SerializeField] private float sidewaysAcceleration = 200f;
         [SerializeField] private float sidewaysDeceleration = 0.94f;
 
-
         [ViewOnly, SerializeField] private float forwardSpeed = 0.1f; // the actual forward speed
         [ViewOnly, SerializeField] private float sidewaysRotationSpeed = 0;
 
@@ -28,38 +25,10 @@ namespace kbradu
         [SerializeField] private ButtonState rotateLeft;
         [SerializeField] private ButtonState rotateRight;
 
-        private void Start()
-        {
-            if(Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
-            {
-                Screen.orientation = ScreenOrientation.AutoRotation;
-                // Enable both landscape orientations
-                Screen.autorotateToLandscapeLeft = true;
-                Screen.autorotateToLandscapeRight = true;
-                // Disable both portrait orientations
-                Screen.autorotateToPortrait = false;
-                Screen.autorotateToPortraitUpsideDown = false;
-
-                if (SystemInfo.supportsGyroscope)
-                {
-                    Input.gyro.enabled = true;
-                    Debug.Log("Gyroscope has been enabled.");
-                }
-                else
-                {
-                    Debug.Log("This device does not have a gyroscope.");
-                }
-            }
-           
-
-        }
-
         private void FixedUpdate()
         {
-            HandleInputMobile();
-            HandleInputDesktop();       
-            ConstantForwardMove();
-           
+            HandleInput();       
+            ConstantForwardMove();         
         }
 
         private void Update()
@@ -68,7 +37,7 @@ namespace kbradu
             Roll();
         }
 
-        private void HandleInputDesktop()
+        private void HandleInput()
         {
             // handle forward
 
@@ -76,50 +45,19 @@ namespace kbradu
                 forwardSpeed = forwardSpeed * forwardAcceleration;
             else
             {
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) || acceleartion1.IsPressed || acceleartion2.IsPressed)
                     forwardSpeed = Mathf.Clamp(forwardSpeed * forwardAcceleration, baseForwardSpeed, maxForwardSpeed);
                 else
                     forwardSpeed = Mathf.Clamp(forwardSpeed * forwardDeceleration, baseForwardSpeed, maxForwardSpeed);
             }
 
             // handle sideways
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || rotateLeft.IsPressed)
             {
                 // Increase rotation speed to the left
                 sidewaysRotationSpeed -= sidewaysAcceleration * Time.fixedDeltaTime;
             }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                // Increase rotation speed to the right
-                sidewaysRotationSpeed += sidewaysAcceleration * Time.fixedDeltaTime;
-            }
-            else
-            {
-                // Gradually slow down rotation when no keys are pressed
-                sidewaysRotationSpeed *= sidewaysDeceleration;
-            }
-
-            // Clamp the rotation speed to within the maximum limits
-            sidewaysRotationSpeed = Mathf.Clamp(sidewaysRotationSpeed, -maxRotationSpeed, maxRotationSpeed);
-        }
-        private void HandleInputMobile()
-        {
-            if (!(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer))
-                return;
-
-            if(acceleartion1.IsPressed || acceleartion2.IsPressed)
-                forwardSpeed = Mathf.Clamp(forwardSpeed * forwardAcceleration, baseForwardSpeed, maxForwardSpeed);
-            else
-                forwardSpeed = Mathf.Clamp(forwardSpeed * forwardDeceleration, baseForwardSpeed, maxForwardSpeed);
-
-
-            // handle sideways
-            if (rotateLeft.IsPressed)
-            {
-                // Increase rotation speed to the left
-                sidewaysRotationSpeed -= sidewaysAcceleration * Time.fixedDeltaTime;
-            }
-            else if (rotateRight.IsPressed)
+            else if (Input.GetKey(KeyCode.D) || rotateRight.IsPressed)
             {
                 // Increase rotation speed to the right
                 sidewaysRotationSpeed += sidewaysAcceleration * Time.fixedDeltaTime;
@@ -145,6 +83,7 @@ namespace kbradu
         {
             transform.Rotate(Vector3.up, Time.deltaTime * sidewaysRotationSpeed);
         }
+
         private void Roll()
         {
             if (Mathf.Abs(sidewaysRotationSpeed) > maxRotationSpeed * 0.97f)

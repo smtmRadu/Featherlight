@@ -25,13 +25,13 @@ namespace kbradu
             switch(acc)
             {
                 case DropAccuracyType.Perfect:
-                    statistics.text += "<color=green>•</color>";
+                    statistics.text += "<color=#2b82ed>•</color>";
                         break;
                 case DropAccuracyType.Good:
-                    statistics.text += "<color=yellow>•</color>";
+                    statistics.text += "<color=green>•</color>";
                     break;
                 case DropAccuracyType.Moderate:
-                    statistics.text += "<color=orange>•</color>";
+                    statistics.text += "<color=yellow>•</color>";
                     break;
                 case DropAccuracyType.Bad:
                     statistics.text += "<color=red>•</color>";
@@ -44,13 +44,13 @@ namespace kbradu
             switch(acc)
             {
                 case DropAccuracyType.Perfect:
-                    text = $"<color=green>Perfect deliver! You dropped the package right in <b>{country.name}</b>, <b>{country.capitalCity}</b>, no more than <b>{(int)error}</b>km away.</color>";
+                    text = $"<color=#2b82ed>Exceptional deliver! You dropped the package right in <b>{country.name}</b>, <b>{country.capitalCity}</b>, no more than <b>{(int)error}</b>km away.</color>";
                     break;
                 case DropAccuracyType.Good:
-                    text = $"<color=yellow>Good deliver! You dropped the package <b>{(int)error}</b>km away from <b>{country.name}</b>, <b>{country.capitalCity}</b>.</color>";
+                    text = $"<color=green>Nice deliver! You dropped the package <b>{(int)error}</b>km away from <b>{country.name}</b>, <b>{country.capitalCity}</b>.</color>";
                     break;
                 case DropAccuracyType.Moderate:
-                    text = $"<color=orange>Quite far from <b>{country.name}</b>, <b>{country.capitalCity}</b>! You dropped the package <b>{(int)error}</b>km away.</color>";
+                    text = $"<color=yellow>Quite far from <b>{country.name}</b>, <b>{country.capitalCity}</b>! You dropped the package <b>{(int)error}</b>km away.</color>";
                     break;
                 case DropAccuracyType.Bad:
                     text = $"<color=red>Oh no! You dropped the package too far from <b>{country.name}</b>, <b>{country.capitalCity}</b>, more than <b>{(int)error}</b>km away.</color>";
